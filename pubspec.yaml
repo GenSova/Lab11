@@ -1,0 +1,28 @@
+name: fingerprint_auth_example
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  http:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.0
+
+  local_auth: ^0.6.3+4
+
+  otp_screen: ^0.0.3
+
+  flutter_lock_screen: ^1.0.3
+  toggle_bar: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - images/
