@@ -1,3 +1,4 @@
+import 'package:fingerprint_auth_example/page/navbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -144,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                                 if (value != null) {
                                   setState(() {
                                     isApiCallProcess = false;
-                                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => FingerprintPage()));
+                                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => NavBar()));
                                   });
 
                                   if (value.token.isNotEmpty) {

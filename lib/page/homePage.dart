@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:toggle_bar/toggle_bar.dart';
+import 'dart:async';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class homePage extends StatefulWidget {
   @override
@@ -9,7 +10,51 @@ class homePage extends StatefulWidget {
 }
 
 class _homePagePageState extends State<homePage> {
+  TabController control;
   int currentIndex = 0;
+
+  //////////////////
+  static const _initialCameraPosition = CameraPosition(
+      target: LatLng(43.233074, 76.890443),
+      zoom: 13.0
+  );
+
+  List<Marker> markers = [];
+
+  @override
+  void initState() {
+    initilize();
+    super.initState();
+  }
+
+  initilize() {
+    Marker first = Marker(
+      markerId: MarkerId('first'),
+      position: LatLng(43.249024, 76.868368),
+      infoWindow: InfoWindow(title: 'First'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    );
+    Marker second = Marker(
+      markerId: MarkerId('second'),
+      position: LatLng(43.226415, 76.873059),
+      infoWindow: InfoWindow(title: 'Second'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    );
+    markers.add(first);
+    markers.add(second);
+    setState(() {
+
+    });
+  }
+
+  ///////////
+
+  getIndex(index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +72,10 @@ class _homePagePageState extends State<homePage> {
                     backgroundColor: Colors.grey[200],
                     elevation: 0,
                     bottom: TabBar(
+                      controller: control,
+                        onTap: (index){
+                        getIndex(index);
+                        },
                         unselectedLabelColor: Color.fromRGBO(72, 84, 108, 1),
                         indicatorSize: TabBarIndicatorSize.label,
                         indicator: BoxDecoration(
@@ -58,6 +107,7 @@ class _homePagePageState extends State<homePage> {
                         ]),
                   ),
                 ))),
+            if (currentIndex == 0)
             Container(
               height: 100,
             margin: EdgeInsets.only(top: 20, bottom: 3),
@@ -101,6 +151,7 @@ class _homePagePageState extends State<homePage> {
               ),
             ),
             ),
+            if (currentIndex == 0)
             Container(
               height: 100,
               margin: EdgeInsets.only(bottom: 3),
@@ -144,6 +195,7 @@ class _homePagePageState extends State<homePage> {
                 ),
               ),
             ),
+            if (currentIndex == 0)
             Container(
               height: 100,
               margin: EdgeInsets.only(bottom: 3),
@@ -187,6 +239,17 @@ class _homePagePageState extends State<homePage> {
                 ),
               ),
             ),
+            if (currentIndex == 1)
+              Container(
+                height: 500,
+                width: 500,
+                child: GoogleMap(
+                  myLocationButtonEnabled: false,
+                  zoomControlsEnabled: false,
+                  initialCameraPosition: _initialCameraPosition,
+                  markers: markers.map((e) => e).toSet(),
+                ),
+              )
           ],
       ),
       ),
